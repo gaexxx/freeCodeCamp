@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Survey form</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <h1 id="title">Survey Form</h1>
+    <p id="description">Let us know your feedback by filling this form</p>
+
+    <form id="survey-form" action="/submit-data" method="POST">
+      <label id="name-label" for="name" name="title"
+        >Name<input
+          type="text"
+          id="name"
+          placeholder="Enter your name"
+          required
+      /></label>
+      <label id="email-label" for="email" name="title"
+        >Email<input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+      /></label>
+      <label id="number-label" for="number" name="title"
+        >Age<input
+          type="number"
+          id="number"
+          min="14"
+          max="110"
+          placeholder="Enter your age"
+      /></label>
+      <p></p>
+      <label name="title"
+        >How many courses did you take so far?
+        <select id="dropdown">
+          <option>select one</option>
+          <option>3 or less</option>
+          <option>4 - 6</option>
+          <option>more than 6</option>
+        </select>
+      </label>
+      <fieldset>
+        Did you find the lessons useful?
+        <label
+          ><input type="radio" name="radio" value="Definitely" class="inline" />
+          Definitely</label
+        >
+
+        <label
+          ><input type="radio" name="radio" value="Sometimes" class="inline" />
+          Sometimes</label
+        >
+
+        <label
+          ><input type="radio" name="radio" value="Not much" class="inline" />
+          Not much</label
+        >
+      </fieldset>
+      <fieldset>
+        Which courses are your favorite?
+        <label
+          ><input type="checkbox" value="0" class="inline" /> Responsive Web
+          Design</label
+        >
+
+        <label
+          ><input type="checkbox" value="1" class="inline" /> JavaScript
+          Algorithms</label
+        >
+
+        <label
+          ><input type="checkbox" value="2" class="inline" /> Front End
+          Development Libraries</label
+        >
+
+        <label
+          ><input type="checkbox" value="3" class="inline" /> Data
+          Visualization</label
+        >
+
+        <label
+          ><input type="checkbox" value="4" class="inline" /> Relational
+          Database</label
+        >
+
+        <label
+          ><input type="checkbox" value="5" class="inline" /> Back End
+          Development and APIs</label
+        >
+
+        <label
+          ><input type="checkbox" value="6" class="inline" /> Quality
+          Assurance</label
+        >
+
+        <label
+          ><input type="checkbox" value="7" class="inline" /> Scientific
+          Computing with Python</label
+        >
+
+        <label
+          ><input type="checkbox" value="8" class="inline" /> Data Analysis with
+          Python</label
+        >
+
+        <label
+          ><input type="checkbox" value="9" class="inline" /> Information
+          Security</label
+        >
+
+        <label
+          ><input type="checkbox" value="10" class="inline" /> Machine Learning
+          with Python</label
+        >
+
+        <label
+          ><input type="checkbox" value="11" class="inline" /> College Algebra
+          with Python</label
+        >
+      </fieldset>
+      <fieldset>
+        Comments and suggestions:
+        <label for="comments">
+          <textarea
+            id="comments"
+            rows="6"
+            cols="30"
+            placeholder="Enter you comment here..."
+          ></textarea>
+        </label>
+      </fieldset>
+      <input type="submit" value="Submit" id="submit" />
+    </form>
+  </body>
+</html>
