@@ -5,12 +5,6 @@ const { createHmac } = require("node:crypto");
 const Stock = require("./mongooseStockModel.js");
 
 module.exports = function (app) {
-  // const Stock = mongoose.model("Stock", {
-  //   stock: { type: String },
-  //   likes: { type: Number },
-  //   clientIp: [{ hashedIp: { type: String }, stockLiked: { type: Boolean } }],
-  // });
-
   app.route("/api/stock-prices/").get(async function (req, res) {
     const { stock, like } = req.query;
 
@@ -18,7 +12,7 @@ module.exports = function (app) {
       return res.send("Please fill out the field/s");
     }
 
-    // in caso si voglia pulire la collection da tutti i documents
+    // in case we want to clean the collection from all its documents
     // Stock.deleteMany({}) // con {} si intende tutte le proprietà
     //   .then((data) => {
     //     console.log(data);
@@ -154,7 +148,10 @@ module.exports = function (app) {
             rel_likes: foundStock2.likes,
           });
         }
+        // sort the array elements by the number of likes
         stockData.sort((a, b) => b.rel_likes - a.rel_likes);
+        // the rel_likes of the second element will be the difference between the likes of
+        // the more liked stock and the likes of the less liked stock
         stockData[1].rel_likes -= stockData[0].rel_likes;
         res.json({
           stockData: [stockData[0], stockData[1]],
