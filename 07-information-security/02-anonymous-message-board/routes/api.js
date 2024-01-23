@@ -1,6 +1,7 @@
 "use strict";
 const mongoose = require("mongoose");
 const Thread = require("./mongooseThreadModel.js");
+const { hash, compare } = require("./crypto.js");
 
 module.exports = function (app) {
   app
@@ -8,7 +9,8 @@ module.exports = function (app) {
 
     .post(async (req, res) => {
       const { board } = req.params;
-      const { text, delete_password } = req.body;
+      const { text } = req.body;
+      const delete_password = await hash(req.body.delete_password);
 
       const newThread = new Thread({
         board,
@@ -78,11 +80,15 @@ module.exports = function (app) {
     .delete(async (req, res) => {
       const { thread_id, delete_password } = req.body;
       const foundThread = await Thread.findById(thread_id);
-      if (delete_password === foundThread.delete_password) {
+      const passIsCorrect = await compare(
+        delete_password,
+        foundThread.delete_password
+      );
+      if (passIsCorrect) {
         const deletedThread = await Thread.deleteOne({ _id: thread_id });
         console.log(deletedThread);
         res.send("success");
-      } else if (delete_password !== foundThread.delete_password) {
+      } else if (!passIsCorrect) {
         res.send("incorrect password");
       }
     })
@@ -175,8 +181,12 @@ module.exports = function (app) {
         res.send("reply already deleted");
         return;
       }
+      const passIsCorrect = await compare(
+        delete_password,
+        foundThread.delete_password
+      );
 
-      if (delete_password === foundReply.delete_password) {
+      if (passIsCorrect) {
         const updatedThread = await Thread.findOneAndUpdate(
           { _id: thread_id, "replies._id": reply_id },
           { $set: { "replies.$.text": "[deleted]" } },
@@ -188,7 +198,7 @@ module.exports = function (app) {
         } else {
           res.send("something went wrong");
         }
-      } else if (delete_password !== foundReply.delete_password) {
+      } else if (!passIsCorrect) {
         res.send("incorrect password");
       }
     })
