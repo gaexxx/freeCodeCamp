@@ -12,17 +12,15 @@ const fccTestingRoutes = require("./routes/fcctesting.js");
 const runner = require("./test-runner");
 
 const app = express();
-// app.use(
-//   helmet({
-//     contentSecurityPolicy: {
-//       directives: {
-//         defaultSrc: ["'self'"],
-//         scriptSrc: ["'self'"],
-//         styleSrc: ["'self'"],
-//       },
-//     },
-//   })
-// );
+app.use(
+  helmet({
+    referrerPolicy: {
+      policy: "same-origin",
+    },
+    xDnsPrefetchControl: { allow: false },
+    frameguard: { action: "sameorigin" },
+  })
+);
 app.use(nocache());
 
 mongoose.connect(process.env.DB);
