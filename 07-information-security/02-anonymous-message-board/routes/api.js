@@ -18,6 +18,7 @@ module.exports = function (app) {
         reported: false,
         delete_password,
         replies: [],
+        replycount: 0,
       });
 
       try {
@@ -73,6 +74,7 @@ module.exports = function (app) {
         }
 
         foundThread.bumped_on = new Date();
+        foundThread.replycount += 1;
         foundThread.replies.push({
           text,
           created_on: foundThread.bumped_on,

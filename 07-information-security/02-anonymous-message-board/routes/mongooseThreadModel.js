@@ -16,5 +16,6 @@ const Thread = mongoose.model("Thread", {
       reported: { type: Boolean },
     },
   ],
+  replycount: { type: Number },
 });
 module.exports = Thread;
