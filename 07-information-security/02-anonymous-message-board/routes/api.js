@@ -22,7 +22,7 @@ module.exports = function (app) {
       });
 
       try {
-        const savedThread = await newThread.save();
+        await newThread.save();
         res.redirect(`/${board}`);
       } catch (error) {
         res.status(500).json({ error: "Internal Server Error" });
@@ -64,6 +64,8 @@ module.exports = function (app) {
     .post(async (req, res) => {
       const { board } = req.params;
       const { text, delete_password, thread_id } = req.body;
+      console.log(req.params);
+      console.log(req.body);
 
       try {
         const foundThread = await Thread.findById(thread_id);
@@ -82,9 +84,12 @@ module.exports = function (app) {
           reported: false,
         });
 
-        const savedThread = await foundThread.save();
-
-        res.redirect(`/${board}/${thread_id}`);
+        await foundThread.save();
+        // if (board === thread_id) {
+        //   res.redirect(`/a/${thread_id}`);
+        // } else {
+        res.redirect(`/${foundThread.board}/${thread_id}`);
+        // }
       } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
