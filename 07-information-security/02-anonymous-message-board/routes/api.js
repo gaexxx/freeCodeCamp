@@ -23,7 +23,7 @@ module.exports = function (app) {
 
       try {
         const savedThread = await newThread.save();
-        res.json([savedThread]);
+        res.redirect(`/${board}`);
       } catch (error) {
         res.status(500).json({ error: "Internal Server Error" });
       }
@@ -84,7 +84,7 @@ module.exports = function (app) {
 
         const savedThread = await foundThread.save();
 
-        res.json([savedThread]);
+        res.redirect(`/${board}/${thread_id}`);
       } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
