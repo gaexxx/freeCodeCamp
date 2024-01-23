@@ -45,12 +45,30 @@ module.exports = function (app) {
         const threads = await Thread.find({ board })
           .sort({ bumped_on: "desc" })
           .limit(10)
-          .select(
-            "-reported -delete_password -replies.reported -replies.delete_password"
-          )
           .exec();
+        const formattedThreads = threads.map((thread) => {
+          // Only include the most recent 3 replies
+          const recentReplies = thread.replies
+            .sort((a, b) => b.created_on - a.created_on)
+            .slice(0, 3)
+            .map((reply) => ({
+              _id: reply._id,
+              text: reply.text,
+              created_on: reply.created_on,
+            }));
 
-        res.json(threads);
+          return {
+            _id: thread._id,
+            board: thread.board,
+            text: thread.text,
+            created_on: thread.created_on,
+            bumped_on: thread.bumped_on,
+            replycount: thread.replycount,
+            replies: recentReplies,
+          };
+        });
+
+        res.json(formattedThreads);
       } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
