@@ -67,6 +67,29 @@ module.exports = function (app) {
       } else if (delete_password !== foundThread.delete_password) {
         res.send("incorrect password");
       }
+    })
+
+    .put(async (req, res) => {
+      const { thread_id } = req.body;
+      console.log(req.body);
+      try {
+        const updatedThread = await Thread.findOneAndUpdate(
+          { _id: thread_id },
+          { $set: { reported: true } },
+          { new: true }
+        );
+
+        if (updatedThread) {
+          console.log("Thread reported:", updatedThread);
+          res.send("reported");
+        } else {
+          console.log("Thread not found");
+          res.status(404).send("Thread not found");
+        }
+      } catch (error) {
+        console.error("Error updating thread:", error);
+        res.status(500).send("Internal Server Error");
+      }
     });
 
   app
@@ -97,11 +120,8 @@ module.exports = function (app) {
         });
 
         await foundThread.save();
-        // if (board === thread_id) {
-        //   res.redirect(`/a/${thread_id}`);
-        // } else {
+
         res.redirect(`/${foundThread.board}/${thread_id}`);
-        // }
       } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
@@ -152,6 +172,28 @@ module.exports = function (app) {
         }
       } else if (delete_password !== foundReply.delete_password) {
         res.send("incorrect password");
+      }
+    })
+
+    .put(async (req, res) => {
+      const { thread_id, reply_id } = req.body;
+      try {
+        const updatedThread = await Thread.findOneAndUpdate(
+          { _id: thread_id, "replies._id": reply_id },
+          { $set: { "replies.$.reported": true } },
+          { new: true }
+        );
+
+        if (updatedThread) {
+          console.log("Thread reported:", updatedThread);
+          res.send("reported");
+        } else {
+          console.log("Thread not found");
+          res.status(404).send("Thread not found");
+        }
+      } catch (error) {
+        console.error("Error updating thread:", error);
+        res.status(500).send("Internal Server Error");
       }
     });
 
