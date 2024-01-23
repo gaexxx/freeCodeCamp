@@ -55,6 +55,18 @@ module.exports = function (app) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
       }
+    })
+
+    .delete(async (req, res) => {
+      const { thread_id, delete_password } = req.body;
+      const foundThread = await Thread.findById(thread_id);
+      if (delete_password === foundThread.delete_password) {
+        const deletedThread = await Thread.deleteOne({ _id: thread_id });
+        console.log(deletedThread);
+        res.send("success");
+      } else if (delete_password !== foundThread.delete_password) {
+        res.send("incorrect password");
+      }
     });
 
   app
@@ -113,7 +125,36 @@ module.exports = function (app) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
       }
+    })
+
+    .delete(async (req, res) => {
+      const { thread_id, reply_id, delete_password } = req.body;
+      const foundThread = await Thread.findById(thread_id);
+      const foundReply = await foundThread.replies.find((reply) =>
+        reply._id.equals(reply_id)
+      );
+      if (foundReply.text === "[deleted]") {
+        res.send("reply already deleted");
+        return;
+      }
+
+      if (delete_password === foundReply.delete_password) {
+        const updatedThread = await Thread.findOneAndUpdate(
+          { _id: thread_id, "replies._id": reply_id },
+          { $set: { "replies.$.text": "[deleted]" } },
+          { new: true }
+        );
+        if (updatedThread) {
+          res.send("success");
+          console.log(updatedThread);
+        } else {
+          res.send("something went wrong");
+        }
+      } else if (delete_password !== foundReply.delete_password) {
+        res.send("incorrect password");
+      }
     });
+
   app.route("/:board/").get(function (req, res) {
     res.sendFile(process.cwd() + "/views/board.html");
   });
