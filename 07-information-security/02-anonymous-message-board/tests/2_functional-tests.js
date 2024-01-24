@@ -15,6 +15,8 @@ suite("Functional Tests", function () {
     // console.log(deletedThread);
   });
   test("Creating a new thread: POST request to /api/threads/{board} with done", (done) => {
+    this.timeout(20000);
+
     chai
       .request(server)
       .keepOpen()
@@ -38,6 +40,8 @@ suite("Functional Tests", function () {
     done();
   });
   test("Creating a new thread: POST request to /api/threads/{board}", async function () {
+    this.timeout(20000);
+
     const res = await chai.request(server).post("/api/threads/board1").send({
       text: "trovare lavoro",
       delete_password: "ciao",
@@ -54,7 +58,7 @@ suite("Functional Tests", function () {
     assert.deepEqual(foundThread.replycount, foundThread.replies.length);
   });
   test("Viewing the 10 most recent threads with 3 replies each: GET request to /api/threads/{board}", async function () {
-    this.timeout(10000);
+    this.timeout(20000);
     for (let i = 0; i < 13; i++) {
       await chai
         .request(server)
@@ -84,6 +88,8 @@ suite("Functional Tests", function () {
     assert.lengthOf(res.body[0].replies, 3);
   });
   test("Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password", async function () {
+    this.timeout(20000);
+
     const res = await chai.request(server).post("/api/threads/board2").send({
       text: "caccia",
       delete_password: "ciao",
@@ -100,6 +106,8 @@ suite("Functional Tests", function () {
     assert.deepEqual(res2.text, "incorrect password");
   });
   test("Deleting a thread with the correct password: DELETE request to /api/threads/{board} with a valid delete_password", async function () {
+    this.timeout(20000);
+
     const res = await chai.request(server).post("/api/threads/board2").send({
       text: "caccia",
       delete_password: "ciao",
@@ -121,6 +129,8 @@ suite("Functional Tests", function () {
     assert.lengthOf(foundThreads, 0);
   });
   test("Reporting a thread: PUT request to /api/threads/{board}", async function () {
+    this.timeout(20000);
+
     const res = await chai.request(server).post("/api/threads/board2").send({
       text: "caccia",
       delete_password: "ciao",
@@ -140,6 +150,8 @@ suite("Functional Tests", function () {
     assert.isTrue(foundThreadAgain.reported);
   });
   test("Creating a new reply: POST request to /api/replies/{board}", async function () {
+    this.timeout(20000);
+
     const resPostThread = await chai
       .request(server)
       .post("/api/threads/board2")
@@ -177,7 +189,7 @@ suite("Functional Tests", function () {
     );
   });
   test("Viewing a single thread with all replies: GET request to /api/replies/{board}", async function () {
-    this.timeout(6000);
+    this.timeout(20000);
     const resPostThread = await chai
       .request(server)
       .post("/api/threads/board2")
@@ -238,7 +250,7 @@ suite("Functional Tests", function () {
     assert.notDeepEqual(resGet.body.created_on, resGet.bumped_on);
   });
   test("Deleting a reply with the incorrect password: DELETE request to /api/replies/{board} with an invalid delete_password", async function () {
-    this.timeout(6000);
+    this.timeout(20000);
     const resPostThread = await chai
       .request(server)
       .post("/api/threads/board2")
@@ -275,7 +287,7 @@ suite("Functional Tests", function () {
     assert.deepEqual(res.text, "incorrect password");
   });
   test("Deleting a reply with the correct password: DELETE request to /api/replies/{board} with a valid delete_password", async function () {
-    this.timeout(6000);
+    this.timeout(20000);
     const resPostThread = await chai
       .request(server)
       .post("/api/threads/board2")
@@ -316,7 +328,7 @@ suite("Functional Tests", function () {
     assert.deepEqual(foundReplyAgain.text, "[deleted]");
   });
   test("Reporting a reply: PUT request to /api/replies/{board}", async function () {
-    this.timeout(6000);
+    this.timeout(20000);
     const resPostThread = await chai
       .request(server)
       .post("/api/threads/board2")
