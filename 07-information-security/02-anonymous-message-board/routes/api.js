@@ -95,7 +95,7 @@ module.exports = function (app) {
 
     .put(async (req, res) => {
       const { thread_id } = req.body;
-      console.log(req.body);
+      // console.log(req.body);
       try {
         const updatedThread = await Thread.findOneAndUpdate(
           { _id: thread_id },
@@ -122,9 +122,8 @@ module.exports = function (app) {
     // POST a new reply
     .post(async (req, res) => {
       const { board } = req.params;
-      const { text, delete_password, thread_id } = req.body;
-      console.log(req.params);
-      console.log(req.body);
+      const { text, thread_id } = req.body;
+      const delete_password = await hash(req.body.delete_password);
 
       try {
         const foundThread = await Thread.findById(thread_id);
@@ -183,7 +182,7 @@ module.exports = function (app) {
       }
       const passIsCorrect = await compare(
         delete_password,
-        foundThread.delete_password
+        foundReply.delete_password
       );
 
       if (passIsCorrect) {
