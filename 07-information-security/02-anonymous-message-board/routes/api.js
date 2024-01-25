@@ -33,14 +33,6 @@ module.exports = function (app) {
 
     // GET the most recent 10 bumped threads on the board
     .get(async (req, res) => {
-      // in caso si voglia pulire la collection da tutti i documents
-      // Thread.deleteMany({}) // con {} si intende tutte le proprietà
-      //   .then((data) => {
-      //     console.log(data);
-      //     res.send("complete delete successful");
-      //   })
-      //   .catch((err) => console.log(err));
-      // return;
       const { board } = req.params;
 
       try {
@@ -159,6 +151,7 @@ module.exports = function (app) {
       try {
         const thread = await Thread.findById(thread_id)
           .select(
+            // exclude these properties
             "-reported -delete_password -replies.reported -replies.delete_password"
           )
           .exec();
