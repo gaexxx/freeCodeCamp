@@ -1,0 +1,58 @@
+body {
+  background-color: white;
+  font-family: Calibri;
+}
+
+main {
+  background-color: #e2e2e2;
+  width: 98%;
+  margin: auto;
+}
+
+figure,
+h1,
+h2,
+p,
+img {
+  text-align: center;
+  margin: auto;
+  padding: 10px 0 10px 0;
+}
+
+figure {
+  background-color: #e2e2e2;
+  width: 98%;
+}
+
+figcaption,
+.quote {
+  font-style: italic;
+}
+
+img {
+  display: block;
+  width: 80%;
+  max-width: 100%;
+  filter: grayscale(100%);
+}
+
+article {
+  width: 80%;
+}
+
+article {
+  margin: auto;
+  padding: 10px 0 10px 0;
+}
+
+ul {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  padding: 10px 0 10px 10px;
+}
+
+li {
+  padding: 10px 0 10px 0;
+  line-height: 1.3;
+}
