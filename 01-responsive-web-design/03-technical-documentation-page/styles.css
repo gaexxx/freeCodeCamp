@@ -1,0 +1,114 @@
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 500px) {
+  body {
+    flex-direction: column;
+  }
+  nav {
+    height: 400px;
+    overflow: auto;
+  }
+  section:first-of-type {
+    border-left: 0 !important;
+    border-top: 1px solid black;
+  }
+  section header,
+  section p {
+    padding: 16px !important;
+  }
+
+  section ul {
+    padding-left: 40px !important;
+  }
+
+  section pre {
+    margin-left: 16px !important;
+    margin-top: 5px !important;
+  }
+}
+
+body {
+  display: flex;
+  font-family: calibri;
+  margin: 0;
+}
+
+nav header {
+  padding-left: 16px;
+  padding-top: 16px;
+}
+
+header {
+  font-size: 2.2rem;
+}
+
+nav ul {
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav li:hover {
+  background-color: #eeeeee;
+  cursor: pointer;
+}
+
+nav li {
+  color: rgb(96, 96, 96);
+  font-size: 1.4rem;
+  padding-left: 16px;
+  line-height: 76px;
+  border-top: 1px solid grey;
+  min-width: 310px;
+  height: 80px;
+}
+
+section {
+  border-left: 3px solid gray;
+}
+
+section header {
+  padding: 1.4rem;
+}
+
+section p,
+section li {
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+section p {
+  padding-left: 2em;
+  margin: 0 0 0 0;
+}
+
+.list-title {
+  font-weight: bold;
+}
+
+section ul {
+  padding-left: 5em;
+  padding-top: 1em;
+  margin: 0;
+}
+
+section pre {
+  font-size: 1rem;
+  margin: 1rem 0 0 50px;
+  padding: 0 1em 0 1em;
+  background-color: rgb(235, 234, 234);
+  width: max-content;
+}
+
+section code {
+  margin: 0;
+}
+
+.margin-top {
+  margin-top: 1rem;
+}

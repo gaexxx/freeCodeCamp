@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Introduction to Bootstrap</title>
+  </head>
+  <body>
+    <nav id="navbar">
+      <header>Introduction to Bootstrap</header>
+      <ul>
+        <a class="nav-link" href="#What_is_Bootstrap?"><li>What is Bootstrap?</li></a>
+        <a class="nav-link" href="#Setting_Up_Bootstrap"><li>Setting Up Bootstrap</li></a>
+        <a class="nav-link" href="#Basic_Structure"><li>Basic Structure</li></a>
+        <a class="nav-link" href="#Working_with_Bootstrap"><li>Working with Bootstrap</li></a>
+        <a class="nav-link" href="#Creating_a_Responsive_Layout"><li>Creating a Responsive Layout</li></a>
+        <a class="nav-link" href="#Styling_Forms_and_Inputs"><li>Styling Forms and Inputs</li></a>
+        <a class="nav-link" href="#Adding_JavaScript_Functionality"><li>Adding JavaScript Functionality</li></a>
+     </ul>
+    </nav>
+    <main id="main-doc">
+      <section class="main-section" id="What_is_Bootstrap?">
+        <header>
+          What is Bootstrap?
+        </header>
+<p>Bootstrap is an open-source front-end framework developed by Twitter. It's designed to simplify and accelerate web development by providing a set of pre-designed HTML, CSS, and JavaScript components. Here's a more in-depth look at what Bootstrap offers:</p>
+<ul>
+  <li><span class="list-title">Responsive Grid System: </span>Bootstrap uses a 12-column grid system that allows you to create responsive layouts for your web pages. This grid system ensures that your content looks great on various screen sizes and devices.</li>
+  <li><span class="list-title">UI Components: </span>Bootstrap includes a rich collection of UI components, such as navigation bars, buttons, forms, modals, alerts, and more. These components are pre-styled and ready for use in your projects.</li>
+  <li><span class="list-title">Typography: </span>Bootstrap provides consistent and visually appealing typography styles for headings, paragraphs, lists, and other text elements, ensuring a polished and professional appearance.</li>
+  <li><span class="list-title">JavaScript Plugins: </span>Bootstrap comes with a library of JavaScript plugins that enhance the functionality of your website. These plugins enable interactive features like carousels, tooltips, popovers, and modal dialogs.</li>
+  <li><span class="list-title">Customization: </span>While Bootstrap offers a default set of styles and components, it's highly customizable. You can easily customize Bootstrap to match your project's specific design requirements by modifying its variables or creating custom stylesheets.</li>
+</ul>
+      </section>
+      <section class="main-section" id="Setting_Up_Bootstrap">
+        <header>
+          Setting Up Bootstrap
+        </header>
+<p>To start using Bootstrap in your project, you need to include the Bootstrap CSS and JavaScript files in your HTML file. Here's a step-by-step breakdown:</p>
+<pre>
+<code>
+&lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"&gt;
+</code>
+</pre>
+<p class="margin-top">This line of code links to the latest version of Bootstrap's CSS hosted on a content delivery network (CDN). Alternatively, you can download the Bootstrap CSS and host it locally in your project.</p>
+<p class="margin-top">Bootstrap relies on jQuery and Popper.js for some of its JavaScript functionality. You can include them from CDNs like this:</p>
+<pre>
+<code>
+&lt;!-- jQuery library --&gt;
+&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- Popper.js library --&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"&gt;&lt;/script&gt;
+</code>
+</pre>
+<p class="margin-top">The following script includes Bootstrap's JavaScript functionality. Place it just before the closing </body> tag in your HTML file.</p>
+<pre>
+<code>
+&lt;!-- Latest compiled JavaScript --&gt;
+&lt;script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"&gt;&lt;/script&gt;
+</code>
+</pre>
+      </section>
+      <section class="main-section" id="Basic_Structure">
+        <header>
+          Basic Structure
+        </header>
+<p>Bootstrap follows a specific structure for its components. Let's take a closer look at a basic Bootstrap structure using a navigation bar as an example:</p>
+<pre>
+<code>
+&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
+  &lt;a class="navbar-brand" href="#"&gt;Your Site&lt;/a&gt;
+  &lt;!-- Navigation links, dropdowns, and other components go here --&gt;
+&lt;/nav&gt;
+</code>
+</pre>
+<ul>
+  <li><span class="list-title">navbar: </span>The <strong>navbar</strong> class defines a navigation bar.</li>
+  <li><span class="list-title">navbar-expand-lg: </span>This class makes the navigation bar expand on larger screens (it's responsive).</li>
+  <li><span class="list-title">navbar-light bg-light: </span> These classes style the navigation bar with a light background color.
+navbar-brand: Use this class for the site's logo or brand name.</li>
+</ul>
+<p class="margin-top">Inside the navigation bar, you can add navigation links, dropdown menus, and other components as needed.</p>
+      </section>
+      <section class="main-section" id="Working_with_Bootstrap">
+        <header>
+          Working with Bootstrap
+        </header>
+<p>Bootstrap provides a variety of components that can be easily integrated into your project. For instance, to create a button, use the following code:<p>
+  <pre>
+<code>
+&lt;button class="btn btn-primary"&gt;Click Me&lt;/button&gt;
+</code>
+</pre>
+<p class="margin-top">Refer to the Bootstrap documentation for a full list of components and their usage: <a href="https://getbootstrap.com/docs/4.5/components/alerts/" target="_blank">Bootstrap Documentation</a>.</p>
+      </section>
+      <section class="main-section" id="Creating_a_Responsive_Layout">
+        <header>
+          Creating a Responsive Layout
+        </header>
+<p>Bootstrap's responsive grid system is one of its most powerful features. To create a responsive layout, you can use the grid classes to define how your content should behave on different screen sizes. Here's an example of a simple two-column layout:</p>
+<pre>
+<code>
+&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-6"&gt;Column 1&lt;/div&gt;
+    &lt;div class="col-md-6"&gt;Column 2&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code>
+</pre>
+<ul>
+  <li>In this example, the <strong>container</strong> class creates a responsive container that adapts to the screen size.</li>
+  <li>The <strong>row</strong> class is used to create a row within the container.</li>
+  <li>The <strong>col-md-6</strong> class is applied to create two equal-width columns for medium-sized screens. Bootstrap provides classes for different screen sizes (e.g., <strong>col-sm</strong>, <strong>col-lg</strong>) to control the layout.</li>
+</ul>
+      </section>
+      </section>
+      <section class="main-section" id="Styling_Forms_and_Inputs">
+        <header>
+          Styling Forms and Inputs
+        </header>
+<p>Bootstrap makes it easy to style forms and form elements. You can use Bootstrap's CSS classes to enhance the appearance of forms, input fields, and buttons. For example, to create a styled form, use the following code:</p>
+<pre>
+<code>
+&lt;form&gt;
+  &lt;div class="form-group"&gt;
+    &lt;label for="exampleInputEmail1"&gt;Email address&lt;/label&gt;
+    &lt;input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"&gt;
+    &lt;small id="emailHelp" class="form-text text-muted"&gt;We'll never share your email with anyone else.&lt;/small&gt;
+  &lt;/div&gt;
+  &lt;button type="submit" class="btn btn-primary"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code>
+</pre>
+<ul>
+  <li>The <strong>form-group</strong> class is used to group form elements and provide spacing.</li>
+  <li>The <strong>form-control</strong> class styles the input field.</li>
+  <li>Bootstrap also provides various form validation styles and feedback classes for form elements.</li>
+</ul>
+      </section></section>
+      <section class="main-section" id="Adding_JavaScript_Functionality">
+        <header>
+          Adding JavaScript Functionality
+        </header>
+<p>Bootstrap includes JavaScript plugins that enhance the functionality of your web page. You can easily integrate these plugins into your project to add interactive elements such as modals, tooltips, and carousels. To use a Bootstrap JavaScript plugin, include the required JavaScript and HTML markup as specified in the Bootstrap documentation.</p>
+<p class="margin-top">For example, to create a modal dialog, you would include the following HTML:</p>
+<pre>
+<code>
+&lt;button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"&gt;Open Modal&lt;/button&gt;
+
+&lt;div class="modal" id="myModal"&gt;
+  &lt;div class="modal-dialog"&gt;
+    &lt;div class="modal-content"&gt;
+      &lt;!-- Modal content goes here --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code>
+</pre>
+<ul>
+  <li>The <strong>data-toggle</strong> and <strong>data-target</strong> attributes trigger the modal when the button is clicked.</li>
+  <li>You can customize the modal content to suit your needs.</li>
+</ul>
+<p class="margin-top">These steps will help you make the most of Bootstrap's responsive grid system, styling capabilities for forms and inputs, and JavaScript plugins to create interactive web pages and applications. Bootstrap's extensive documentation provides detailed guidance on using these features effectively.</p>
+      </main>
+  </body>
+</html>
