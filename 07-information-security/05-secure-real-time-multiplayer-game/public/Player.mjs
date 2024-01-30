@@ -1,10 +1,7 @@
-const canvas = document.getElementById("game-window");
-const context = canvas.getContext("2d");
-
 const minX = 5;
-const maxX = canvas.width - 5;
+const maxX = 640 - 5; // canvas.width - 5
 const minY = 50;
-const maxY = canvas.height - 5;
+const maxY = 480 - 5; // canvas.height - 5
 const r = 20;
 // let vxl = 0;
 // let vxr = 0;
@@ -19,7 +16,7 @@ class Player {
     this.id = id;
   }
 
-  render() {
+  render(context) {
     context.beginPath();
     context.arc(this.x, this.y, 20, 0, 2 * Math.PI); // cerchio
     context.fillStyle = "blue";

@@ -1,7 +1,3 @@
-// import { render } from "../server";
-
-const canvas = document.getElementById("game-window");
-const context = canvas.getContext("2d");
 class Collectible {
   constructor({ x, y, value, id }) {
     this.id = id;
@@ -10,7 +6,7 @@ class Collectible {
     this.y = y;
   }
 
-  render() {
+  render(context) {
     context.beginPath();
     context.arc(this.x, this.y, 5, 0, 2 * Math.PI); // cerchio
     if (this.value === 1) context.fillStyle = "brown";

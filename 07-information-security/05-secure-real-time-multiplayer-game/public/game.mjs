@@ -55,7 +55,7 @@ function rectangle(x, y, w, h) {
 function animate() {
   context.clearRect(0, 0, canvas.width, canvas.height);
 
-  collectible.render();
+  collectible.render(context);
 
   rectangle(minX, minY, maxX - minX, maxY - minY);
 
@@ -72,7 +72,7 @@ function animate() {
   let mainPlayer = players.filter((player) => player.id === socket.id);
 
   players.forEach((data) => {
-    data.render();
+    data.render(context);
   });
 
   // check if exists because in the first frames it doesn't exists
