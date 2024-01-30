@@ -15,6 +15,8 @@ const random = {
   value: () => Math.floor(Math.random() * (4 - 1)) + 1,
 };
 
+let collectible;
+
 const socketHandler = (server) => {
   const io = require("socket.io")(server);
 
@@ -22,7 +24,14 @@ const socketHandler = (server) => {
 
   io.on("connect", (socket) => {
     players.push({ id: socket.id, x: random.x(r), y: random.y(r), score: 0 });
-    console.log("player connessi: ", players);
+    if (!collectible) {
+      collectible = {
+        id: 0,
+        x: random.x(rCollectible),
+        y: random.y(rCollectible),
+        value: random.value(),
+      };
+    }
 
     socket.on("updatePlayers", (data) => {
       // console.log(data.id);
@@ -34,13 +43,14 @@ const socketHandler = (server) => {
     });
     io.emit("onUpdatePlayers", players);
 
-    socket.on("collect", (data) => {
-      players.forEach((player) => {
-        if (player.id !== socket.id) {
-          io.emit("onCollect", data);
-        }
-      });
+    socket.on("collect", () => {
+      collectible.id++;
+      collectible.x = random.x(rCollectible);
+      collectible.y = random.y(rCollectible);
+      collectible.value = random.value();
+      io.emit("onCollect", collectible);
     });
+    io.emit("onCollect", collectible);
 
     socket.on("disconnect", (reason) => {
       const index = players.findIndex((player) => player.id === socket.id);

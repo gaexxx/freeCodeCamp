@@ -14,27 +14,9 @@ const r = 20;
 const rCollectible = 5;
 const speed = 5;
 
-const random = {
-  x: (radius) =>
-    Math.floor(Math.random() * (maxX - radius - (minX + radius))) +
-    (minX + radius),
-  y: (radius) =>
-    Math.floor(Math.random() * (maxY - radius - (minY + radius))) +
-    (minY + radius),
-  value: () => Math.floor(Math.random() * (4 - 1)) + 1,
-};
-
-let id = 0;
-
 let players = [];
-let collectible = new Collectible({
-  x: random.x(rCollectible),
-  y: random.y(rCollectible),
-  value: random.value(),
-  id,
-});
+let collectible;
 
-let direction;
 let arrowUp = false;
 let arrowDown = false;
 let arrowLeft = false;
@@ -55,22 +37,29 @@ function rectangle(x, y, w, h) {
 
 function animate() {
   context.clearRect(0, 0, canvas.width, canvas.height);
+  // console.log(collectible);
+  let mainPlayer = players.filter((player) => player.id === socket.id);
 
-  collectible.render(context);
+  // check if exists because in the first frames it doesn't exists
+  if (collectible && mainPlayer[0]) {
+    collectible.render(context);
+
+    if (
+      getDistance(
+        mainPlayer[0].x,
+        mainPlayer[0].y,
+        collectible.x,
+        collectible.y
+      ) <= r
+    ) {
+      mainPlayer[0].collision(collectible);
+
+      socket.emit("collect");
+    }
+  }
+  // console.log(mainPlayer[0]);
 
   rectangle(minX, minY, maxX - minX, maxY - minY);
-
-  // if (getDistance(player.x, player.y, collectible.x, collectible.y) <= r) {
-  //   player.collision(collectible.value);
-  //   id += 1;
-  //   collectible.x = random.x(rCollectible);
-  //   collectible.y = random.y(rCollectible);
-  //   collectible.value = random.value();
-  //   collectible.id;
-  //   socket.emit("collect", collectible);
-  // }
-
-  let mainPlayer = players.filter((player) => player.id === socket.id);
 
   players.forEach((data) => {
     data.render(context);
@@ -86,8 +75,6 @@ function animate() {
       score: mainPlayer[0].score,
     });
   }
-
-  console.log(direction);
 
   requestAnimationFrame(animate);
 }
@@ -107,14 +94,13 @@ document.addEventListener("keyup", function (e) {
 });
 
 socket.on("onCollect", (data) => {
-  //   console.log("da evento:", data);
-  collectible.x = data.x;
-  collectible.y = data.y;
-  collectible.value = data.value;
-  collectible.id = data.id;
+  collectible = new Collectible({
+    x: data.x,
+    y: data.y,
+    value: data.value,
+    id: data.id,
+  });
 });
-
-socket.emit("collect", collectible);
 
 socket.on("onUpdatePlayers", (updatedPlayers) => {
   players = updatedPlayers.map((player) => {

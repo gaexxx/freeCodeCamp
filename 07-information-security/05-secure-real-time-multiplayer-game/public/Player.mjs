@@ -57,9 +57,10 @@ class Player {
   }
 
   collision(item) {
-    if (item === 1) this.score += 1;
-    if (item === 2) this.score += 2;
-    if (item === 3) this.score += 3;
+    if (item.value === 1) this.score += 1;
+    if (item.value === 2) this.score += 2;
+    if (item.value === 3) this.score += 3;
+    return true;
   }
 
   calculateRank(arr) {}
