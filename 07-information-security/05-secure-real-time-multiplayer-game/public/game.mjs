@@ -12,6 +12,7 @@ const minY = 50;
 const maxY = 480 - 5; // canvas.height - 5
 const r = 20;
 const rCollectible = 5;
+const speed = 5;
 
 const random = {
   x: (radius) =>
@@ -25,7 +26,6 @@ const random = {
 
 let id = 0;
 
-let player = new Player({ x: random.x(r), y: random.y(r), score: 0, id: 1 });
 let players = [];
 let collectible = new Collectible({
   x: random.x(rCollectible),
@@ -34,10 +34,11 @@ let collectible = new Collectible({
   id,
 });
 
-let vxl = 0;
-let vxr = 0;
-let vyu = 0;
-let vyd = 0;
+let direction;
+let arrowUp = false;
+let arrowDown = false;
+let arrowLeft = false;
+let arrowRight = false;
 
 let getDistance = function (xCircle1, yCircle1, xCircle2, yCircle2) {
   var result = Math.sqrt(
@@ -59,15 +60,15 @@ function animate() {
 
   rectangle(minX, minY, maxX - minX, maxY - minY);
 
-  if (getDistance(player.x, player.y, collectible.x, collectible.y) <= r) {
-    player.collision(collectible.value);
-    id += 1;
-    collectible.x = random.x(rCollectible);
-    collectible.y = random.y(rCollectible);
-    collectible.value = random.value();
-    collectible.id;
-    socket.emit("collect", collectible);
-  }
+  // if (getDistance(player.x, player.y, collectible.x, collectible.y) <= r) {
+  //   player.collision(collectible.value);
+  //   id += 1;
+  //   collectible.x = random.x(rCollectible);
+  //   collectible.y = random.y(rCollectible);
+  //   collectible.value = random.value();
+  //   collectible.id;
+  //   socket.emit("collect", collectible);
+  // }
 
   let mainPlayer = players.filter((player) => player.id === socket.id);
 
@@ -77,7 +78,7 @@ function animate() {
 
   // check if exists because in the first frames it doesn't exists
   if (mainPlayer[0]) {
-    mainPlayer[0].movePlayer(vxl, vxr, vyu, vyd);
+    mainPlayer[0].movePlayer(speed, arrowUp, arrowDown, arrowLeft, arrowRight);
     socket.emit("updatePlayers", {
       id: mainPlayer[0].id,
       x: mainPlayer[0].x,
@@ -86,21 +87,23 @@ function animate() {
     });
   }
 
+  console.log(direction);
+
   requestAnimationFrame(animate);
 }
 
 document.addEventListener("keydown", function (e) {
-  if (e.code === "ArrowUp") vyu = -5;
-  if (e.code === "ArrowDown") vyd = 5;
-  if (e.code === "ArrowLeft") vxl = -5;
-  if (e.code === "ArrowRight") vxr = 5;
+  if (e.code === "ArrowUp") arrowUp = true;
+  if (e.code === "ArrowDown") arrowDown = true;
+  if (e.code === "ArrowLeft") arrowLeft = true;
+  if (e.code === "ArrowRight") arrowRight = true;
 });
 
 document.addEventListener("keyup", function (e) {
-  if (e.code === "ArrowUp") vyu = 0;
-  if (e.code === "ArrowDown") vyd = 0;
-  if (e.code === "ArrowLeft") vxl = 0;
-  if (e.code === "ArrowRight") vxr = 0;
+  if (e.code === "ArrowUp") arrowUp = false;
+  if (e.code === "ArrowDown") arrowDown = false;
+  if (e.code === "ArrowLeft") arrowLeft = false;
+  if (e.code === "ArrowRight") arrowRight = false;
 });
 
 socket.on("onCollect", (data) => {

@@ -68,7 +68,7 @@ suite("Unit Tests", () => {
       done();
     });
 
-    test("movePlayer(str, num) adjusts a player's position.", (done) => {
+    test("movePlayer(speed, arrowUp, arrowDown, arrowLeft, arrowRight) adjusts a player's position.", (done) => {
       // Note: Only testing movement along the x axis in case
       // the game is a 2D platformer
       const testPlayer = new Player({
@@ -77,11 +77,11 @@ suite("Unit Tests", () => {
         score: 0,
         id: Date.now(),
       });
-      testPlayer.movePlayer("right", 5);
+      testPlayer.movePlayer(5, false, false, false, true);
       const testPos1 = { x: testPlayer.x, y: testPlayer.y };
       const expectedPos1 = { x: 105, y: 100 };
 
-      testPlayer.movePlayer("left", 10);
+      testPlayer.movePlayer(10, false, false, true, false);
       const testPos2 = { x: testPlayer.x, y: testPlayer.y };
       const expectedPos2 = { x: 95, y: 100 };
 

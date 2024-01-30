@@ -3,10 +3,6 @@ const maxX = 640 - 5; // canvas.width - 5
 const minY = 50;
 const maxY = 480 - 5; // canvas.height - 5
 const r = 20;
-// let vxl = 0;
-// let vxr = 0;
-// let vyu = 0;
-// let vyd = 0;
 
 class Player {
   constructor({ x, y, score, id }) {
@@ -24,23 +20,40 @@ class Player {
     context.stroke();
   }
 
-  movePlayer(vxl, vxr, vyu, vyd) {
-    if (this.y <= minY + r) {
-      vyu = 0;
+  movePlayer(speed, arrowUp, arrowDown, arrowLeft, arrowRight) {
+    let sl = 0;
+    let sr = 0;
+    let su = 0;
+    let sd = 0;
+
+    if (arrowLeft) sl = -speed;
+    if (arrowRight) sr = speed;
+    if (arrowUp) su = -speed;
+    if (arrowDown) sd = speed;
+    if (arrowUp && arrowLeft) {
+      sl = -speed;
+      su = -speed;
     }
-    if (this.y >= maxY - r) {
-      vyd = 0;
+    if (arrowUp && arrowRight) {
+      sr = speed;
+      su = -speed;
     }
-    if (this.x <= minX + r) {
-      vxl = 0;
+    if (arrowDown && arrowLeft) {
+      sl = -speed;
+      sd = speed;
     }
-    if (this.x >= maxX - r) {
-      vxr = 0;
+    if (arrowDown && arrowRight) {
+      sr = speed;
+      sd = speed;
     }
-    this.x += vxl;
-    this.x += vxr;
-    this.y += vyu;
-    this.y += vyd;
+
+    if (this.x + sl >= minX + r && this.x + sr <= maxX - r) {
+      this.x += sl + sr;
+    }
+
+    if (this.y + su >= minY + r && this.y + sd <= maxY - r) {
+      this.y += su + sd;
+    }
   }
 
   collision(item) {
