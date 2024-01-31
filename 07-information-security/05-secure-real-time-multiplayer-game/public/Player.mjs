@@ -63,7 +63,15 @@ class Player {
     return true;
   }
 
-  calculateRank(arr) {}
+  calculateRank(arr, mainPlayer) {
+    let playersSorted = arr.sort((a, b) => {
+      return b.score - a.score;
+    });
+    let indexMainPlayer = playersSorted.findIndex(
+      (player) => player.id === mainPlayer.id
+    );
+    return `Rank: ${indexMainPlayer + 1} / ${arr.length}`;
+  }
 }
 
 export default Player;

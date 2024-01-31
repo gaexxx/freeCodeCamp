@@ -35,6 +35,12 @@ function rectangle(x, y, w, h) {
   context.stroke();
 }
 
+function text(text, px, x, y) {
+  context.font = `${px}px 'Press Start 2P', cursive`;
+  context.fillStyle = "black";
+  context.fillText(text, x, y);
+}
+
 function animate() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   // console.log(collectible);
@@ -64,6 +70,12 @@ function animate() {
   players.forEach((data) => {
     data.render(context);
   });
+
+  text("Controls: WASD", 14, 5, 35);
+  text("Coin Race", 18, 240, 35);
+  if (mainPlayer[0]) {
+    text(mainPlayer[0].calculateRank(players, mainPlayer[0]), 14, 470, 35);
+  }
 
   // check if exists because in the first frames it doesn't exists
   if (mainPlayer[0]) {
