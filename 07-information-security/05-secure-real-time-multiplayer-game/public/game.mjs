@@ -1,6 +1,6 @@
 import Player from "./Player.mjs";
 import Collectible from "./Collectible.mjs";
-import svg from "./images/collectible.js";
+import appleSvg from "./images/collectible.js";
 
 var socket = io();
 
@@ -126,7 +126,7 @@ socket.on("onCollect", (data) => {
     id: data.id,
   });
   appleColor = collectible.color();
-  apple.src = svg(appleColor);
+  apple.src = appleSvg(appleColor);
 });
 
 socket.on("onUpdatePlayers", (updatedPlayers) => {
