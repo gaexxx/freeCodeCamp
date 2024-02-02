@@ -3,7 +3,8 @@ const maxX = 640 - 5; // canvas.width - 5
 const minY = 50;
 const maxY = 480 - 5; // canvas.height - 5
 const r = 20;
-const rCollectible = 5;
+const appleSize = 25;
+const appleHalfSize = appleSize / 2;
 
 const random = {
   x: (radius) =>
@@ -27,8 +28,8 @@ const socketHandler = (server) => {
     if (!collectible) {
       collectible = {
         id: 0,
-        x: random.x(rCollectible),
-        y: random.y(rCollectible),
+        x: random.x(appleHalfSize),
+        y: random.y(appleHalfSize),
         value: random.value(),
       };
     }
@@ -45,8 +46,8 @@ const socketHandler = (server) => {
 
     socket.on("collect", () => {
       collectible.id++;
-      collectible.x = random.x(rCollectible);
-      collectible.y = random.y(rCollectible);
+      collectible.x = random.x(appleHalfSize);
+      collectible.y = random.y(appleHalfSize);
       collectible.value = random.value();
       io.emit("onCollect", collectible);
     });

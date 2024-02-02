@@ -1,5 +1,6 @@
 import Player from "./Player.mjs";
 import Collectible from "./Collectible.mjs";
+import svg from "./images/collectible.js";
 
 var socket = io();
 
@@ -11,8 +12,10 @@ const maxX = 640 - 5; // canvas.width - 5
 const minY = 50;
 const maxY = 480 - 5; // canvas.height - 5
 const r = 20;
-const rCollectible = 5;
+const appleSize = 25;
 const speed = 5;
+let appleColor = "";
+let apple = new Image();
 
 let players = [];
 let collectible;
@@ -38,17 +41,27 @@ function rectangle(x, y, w, h) {
 function text(text, px, x, y) {
   context.font = `${px}px 'Press Start 2P', cursive`;
   context.fillStyle = "black";
+  context.textAlign = "center";
   context.fillText(text, x, y);
 }
 
 function animate() {
   context.clearRect(0, 0, canvas.width, canvas.height);
-  // console.log(collectible);
+
   let mainPlayer = players.filter((player) => player.id === socket.id);
 
   // check if exists because in the first frames it doesn't exists
   if (collectible && mainPlayer[0]) {
-    collectible.render(context);
+    // collectible.render(context);
+    appleColor = collectible.color();
+
+    context.drawImage(
+      apple,
+      collectible.x - appleSize / 2, // to have the coordinates in the middle of the apple
+      collectible.y - appleSize / 2,
+      appleSize,
+      appleSize
+    );
 
     if (
       getDistance(
@@ -56,7 +69,7 @@ function animate() {
         mainPlayer[0].y,
         collectible.x,
         collectible.y
-      ) <= r
+      ) <= appleSize
     ) {
       mainPlayer[0].collision(collectible);
 
@@ -71,10 +84,10 @@ function animate() {
     data.render(context);
   });
 
-  text("Controls: WASD", 14, 5, 35);
-  text("Coin Race", 18, 240, 35);
+  text("Controls: WASD", 14, canvas.width / 6, 35);
+  text("Apple Race", 18, canvas.width / 2, 35);
   if (mainPlayer[0]) {
-    text(mainPlayer[0].calculateRank(players, mainPlayer[0]), 14, 470, 35);
+    text(mainPlayer[0].calculateRank(players, mainPlayer[0]), 14, 550, 35);
   }
 
   // check if exists because in the first frames it doesn't exists
@@ -112,6 +125,8 @@ socket.on("onCollect", (data) => {
     value: data.value,
     id: data.id,
   });
+  appleColor = collectible.color();
+  apple.src = svg(appleColor);
 });
 
 socket.on("onUpdatePlayers", (updatedPlayers) => {
