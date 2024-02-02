@@ -1,0 +1,321 @@
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Source Sans Pro;
+  font-size: 1.1rem;
+  color: #333333;
+}
+
+/* header */
+#header {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: transparent;
+  z-index: 90;
+  align-items: center;
+  transition: 0.5s ease;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(8, 8, 8, 10%);
+}
+
+#header:after {
+  content: "";
+  width: 40%;
+}
+
+header img {
+  width: 10rem;
+}
+
+#navbar {
+  position: fixed;
+  /* top: 1.5rem;  */
+  width: 50%;
+  right: 1rem;
+}
+
+#navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-link:hover {
+  font-size: 1.3rem;
+  transition: 0.2s ease;
+}
+
+/* welcome-section */
+#welcome-section {
+  height: 100vh;
+  background: radial-gradient(
+    circle closest-corner at center,
+    rgb(40, 40, 40),
+    rgb(8, 8, 8)
+  );
+}
+
+#welcome-section div {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  right: 0;
+}
+
+#welcome-section h1,
+#welcome-section h3 {
+  color: rgb(166, 166, 166);
+  text-align: center;
+}
+
+#welcome-section hr {
+  width: 6rem;
+  margin: 1rem auto;
+}
+
+/* projects-section */
+.fixed-background {
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  height: 10rem;
+}
+
+.fixed-background.first {
+  background-image: url("https://img.cdn-pictorem.com/uploads/collection/G/GK2NRU10BRR/900_TimmyLA_EB3DB212-ECE6-4315-8072-A21859D5489Cno_Fotor.jpg");
+}
+
+#projects {
+  background: rgb(255, 255, 0);
+  text-align: center;
+  padding-bottom: 4rem;
+}
+
+#projects h2 {
+  margin: 3rem;
+  color: rgb(62, 62, 62);
+}
+
+#projects hr {
+  width: 6rem;
+  margin: 2rem auto;
+}
+
+.tiles-container {
+  margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 1rem;
+}
+
+.project-tile {
+  width: 20rem;
+  height: 20rem;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5% 5% 0 0;
+  box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.8);
+}
+
+figure img {
+  height: 90%;
+  width: 100%;
+  border-radius: 5% 5% 0 0;
+}
+
+figcaption {
+  height: 10%;
+  background-color: rgba(0, 0, 0, 0.459);
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  line-height: 2rem;
+}
+
+#projects a {
+  text-decoration: none;
+}
+
+#projects a:hover {
+  transform: scale(1.1);
+  transition: 0.5s ease;
+}
+
+/* contact section */
+.fixed-background.second {
+  background-image: url("https://media.istockphoto.com/id/1067388902/vector/black-and-yellow-tartan-plaid-seamless-pattern-design.jpg?s=612x612&w=0&k=20&c=FUAYpSc1Jo6Z2BaxPAEgWaisYXTozgsFc4kaVjpjqfg=");
+}
+
+#contact {
+  background: linear-gradient(90deg, rgb(40, 40, 40), rgb(8, 8, 8));
+}
+
+#contact h2 {
+  text-align: center;
+  margin: 3rem;
+  color: rgb(166, 166, 166);
+}
+
+#contact hr {
+  width: 4rem;
+  margin: 3rem auto;
+}
+
+#social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  font-size: 5rem;
+  width: 100%;
+  bottom: 10px;
+  right: 10px;
+  transition: opacity 3s;
+  margin: 4rem auto 0 auto;
+  gap: 3rem;
+}
+
+#social-icons a {
+  color: rgb(166, 166, 166);
+  box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.8);
+  border-radius: 20%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(90deg, rgb(47, 47, 47), rgb(22, 22, 22));
+  width: 90vw;
+  max-width: 600px;
+  min-width: 250px;
+  margin: 3rem auto 0;
+  border: 1px solid rgb(166, 166, 166);
+  padding: 1rem 2rem 0;
+  border-radius: 5px;
+}
+
+label {
+  margin: 0.8rem 0;
+  color: rgb(166, 166, 166);
+}
+
+input[type="text"],
+input[type="email"],
+select {
+  width: 100%;
+  height: 1.8rem;
+  background-color: rgb(200, 200, 200);
+  border: 1px solid #00000020;
+  border-radius: 5px;
+  font-family: inherit;
+  outline: none;
+}
+
+input[id="submit"] {
+  margin: 1rem auto;
+  width: 30%;
+  display: block;
+  border: 1px solid #00000020;
+  background-color: #9393e320;
+  height: 1.5rem;
+  border-radius: 5px;
+  font-weight: bold;
+  color: rgb(166, 166, 166);
+  box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.8);
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  height: 16rem;
+  background-color: rgb(200, 200, 200);
+  border: 1px solid #00000020;
+  border-radius: 5px;
+  resize: none;
+  font-family: inherit;
+  outline: none;
+}
+
+fieldset:not(label) {
+  font-size: 1.3rem;
+  border: 0;
+  color: rgb(166, 166, 166);
+}
+
+label[name="title"] {
+  font-size: 1.3rem;
+}
+
+footer {
+  border-top: 1px solid yellow;
+  margin-top: 4rem;
+  height: 4rem;
+  background-color: rgb(13, 13, 13);
+  text-align: center;
+}
+
+footer p {
+  line-height: 3rem;
+}
+
+@media only screen and (max-width: 550px) {
+  #header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 6rem;
+    position: fixed;
+    top: 0;
+    background-color: transparent;
+    z-index: 1;
+    align-items: center;
+    transition: 0.5s ease;
+    gap: 1rem;
+  }
+
+  header img {
+    width: 10rem;
+  }
+
+  #navbar {
+    width: 100vw;
+    /* top: 4.3rem; */
+    padding-top: 3.7rem;
+    left: 0;
+  }
+
+  #navbar ul {
+    display: flex;
+  }
+
+  #social-icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    font-size: 2rem;
+    width: 100%;
+    bottom: 10px;
+    right: 10px;
+    transition: opacity 2s;
+    margin: 4rem auto 0 auto;
+    gap: 1rem;
+  }
+}

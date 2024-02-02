@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- header -->
+    <header id="header">
+      <img id="logo" src="" alt="logo" />
+      <nav id="navbar">
+        <ul>
+          <li><a class="nav-link" href="#welcome-section">Welcome</a></li>
+          <li><a class="nav-link" href="#projects">Recent projects</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- welcome-section -->
+    <section id="welcome-section">
+      <div>
+        <h1>Gaetano Spagnoli</h1>
+        <hr />
+        <h3>Web Developer</h3>
+      </div>
+    </section>
+    <!-- project-section -->
+    <section id="projects">
+      <div class="fixed-background first"></div>
+      <h2>Recent projects</h2>
+      <hr />
+      <div class="tiles-container">
+        <link /><a
+          target="_blank"
+          href="https://www.freecodecamp.org/learn/2022/responsive-web-design/build-a-product-landing-page-project/build-a-product-landing-page"
+          ><div class="project-tile">
+            <figure>
+              <img src="" alt="image" />
+              <figcaption>Lending Product Page</figcaption>
+            </figure>
+          </div></a
+        >
+        <link /><a
+          target="_blank"
+          href="https://www.freecodecamp.org/learn/2022/responsive-web-design/build-a-tribute-page-project/build-a-tribute-page"
+          ><div class="project-tile">
+            <figure>
+              <img src="" alt="image" />
+              <figcaption>Tribute Page</figcaption>
+            </figure>
+          </div></a
+        >
+        <link /><a
+          target="_blank"
+          href="https://www.freecodecamp.org/learn/2022/responsive-web-design/build-a-technical-documentation-page-project/build-a-technical-documentation-page"
+          ><div class="project-tile">
+            <figure>
+              <img src="" alt="image" />
+              <figcaption>Documentation Page</figcaption>
+            </figure>
+          </div></a
+        >
+      </div>
+    </section>
+    <!-- contact section -->
+    <section id="contact">
+      <div class="fixed-background second"></div>
+      <h2>Contact</h2>
+      <hr />
+      <div id="social-icons">
+        <a id="profile-link" href="https://github.com/gaexxx" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.freecodecamp.org/gaexxx" target="_black">
+          <i class="fab fa-free-code-camp"></i>
+        </a>
+        <a href="https://twitter.com/" target="_black">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com/" target="_black">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+      <h2>Leave a message</h2>
+      <hr />
+      <form id="message-form" action="/submit-data" method="POST">
+        <label id="name-label" for="name" name="title"
+          >Name<input
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+            required
+        /></label>
+        <label id="email-label" for="email" name="title"
+          >Email<input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+        /></label>
+        <fieldset>
+          Message
+          <label for="message">
+            <textarea
+              id="message"
+              rows="6"
+              cols="30"
+              placeholder="Enter your message here..."
+            ></textarea>
+          </label>
+        </fieldset>
+        <input type="submit" value="Send" id="submit" />
+      </form>
+      <footer>
+        <p>© 2023 Gaetano Spagnoli. All rights reserved</p>
+      </footer>
+    </section>
+  </body>
+  <script>
+    // Function to handle the scroll event
+    function handleScroll() {
+      var hiddenElement = document.getElementById("social-icons");
+      var triggerPoint = 1200; // Adjust this value to set the scroll point for the element to appear.
+
+      if (window.scrollY >= triggerPoint) {
+        hiddenElement.style.opacity = 1;
+      } else {
+        hiddenElement.style.opacity = 0;
+      }
+    }
+
+    // Add an event listener for the scroll event
+    window.addEventListener("scroll", handleScroll);
+
+    var image1 = new Image();
+    image1.src = "";
+    var image2 = new Image();
+    image2.src = "";
+    var image = document.getElementById("logo");
+    const header = document.getElementById("header");
+    const a = document.getElementsByClassName("nav-link");
+    window.addEventListener("scroll", () => {
+      const scrollPosition = 1;
+      if (window.scrollY > scrollPosition) {
+        header.style.backgroundColor = "white";
+        image.src = image2.src;
+        for (let i = 0; i < a.length; i++) {
+          a[i].style.color = "black";
+        }
+      } else {
+        header.style.backgroundColor = "transparent";
+        image.src = image1.src;
+        for (let i = 0; i < a.length; i++) {
+          a[i].style.color = "white";
+        }
+      }
+    });
+  </script>
+</html>
