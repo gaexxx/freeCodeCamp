@@ -15,9 +15,9 @@ const maxY = 480 - 5; // canvas.height - 5
 const appleSize = 25;
 const dogSize = 70;
 const speed = 5;
+const playerImages = new Map();
 let appleColor = "";
 let apple = new Image();
-const playerImages = new Map();
 
 let players = [];
 
@@ -93,7 +93,7 @@ function animate() {
   }
   // console.log(mainPlayer[0]);
 
-  text("Controls: WASD", 14, canvas.width / 6, 35);
+  text("Controls: WASD", 14, 105, 35);
   text("Apple Race", 18, canvas.width / 2, 35);
   if (mainPlayer[0]) {
     text(mainPlayer[0].calculateRank(players, mainPlayer[0]), 14, 550, 35);
@@ -115,17 +115,17 @@ function animate() {
 }
 
 document.addEventListener("keydown", function (e) {
-  if (e.code === "ArrowUp") arrowUp = true;
-  if (e.code === "ArrowDown") arrowDown = true;
-  if (e.code === "ArrowLeft") arrowLeft = true;
-  if (e.code === "ArrowRight") arrowRight = true;
+  if (e.code === "ArrowUp" || e.code === "KeyW") arrowUp = true;
+  if (e.code === "ArrowDown" || e.code === "KeyS") arrowDown = true;
+  if (e.code === "ArrowLeft" || e.code === "KeyA") arrowLeft = true;
+  if (e.code === "ArrowRight" || e.code === "KeyD") arrowRight = true;
 });
 
 document.addEventListener("keyup", function (e) {
-  if (e.code === "ArrowUp") arrowUp = false;
-  if (e.code === "ArrowDown") arrowDown = false;
-  if (e.code === "ArrowLeft") arrowLeft = false;
-  if (e.code === "ArrowRight") arrowRight = false;
+  if (e.code === "ArrowUp" || e.code === "KeyW") arrowUp = false;
+  if (e.code === "ArrowDown" || e.code === "KeyS") arrowDown = false;
+  if (e.code === "ArrowLeft" || e.code === "KeyA") arrowLeft = false;
+  if (e.code === "ArrowRight" || e.code === "KeyD") arrowRight = false;
 });
 
 socket.on("onCollect", (data) => {
