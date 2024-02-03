@@ -38,12 +38,13 @@ let getDistance = function (xObj1, yObj1, xObj2, yObj2) {
 function rectangle(x, y, w, h) {
   context.beginPath();
   context.rect(x, y, w, h);
+  context.strokeStyle = "white";
   context.stroke();
 }
 
 function text(text, px, x, y) {
   context.font = `${px}px 'Press Start 2P', cursive`;
-  context.fillStyle = "black";
+  context.fillStyle = "white";
   context.textAlign = "center";
   context.fillText(text, x, y);
 }

@@ -3,12 +3,12 @@ body {
 }
 
 code {
-  background: #d0d0d5;
+  background: #060079;
 }
 
 canvas {
   margin: auto;
-  background-color: gray;
+  background-color: #9e3a00;
   border: solid 1px black;
 }
 
