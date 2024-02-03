@@ -6,6 +6,8 @@ class Collectible {
     this.y = y;
   }
 
+  // socketHandler.js handles the random value of collectible.value
+  // which will be a random number between 1 and 3
   color() {
     let color = "";
     if (this.value === 1) color = "red";

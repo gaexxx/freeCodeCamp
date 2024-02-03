@@ -14,12 +14,12 @@ const socketHandler = require("./socketHandler.js");
 
 const app = express();
 
-const server = http.createServer(app);
+const server = http.createServer(app); // for setting the socket
 const io = socketHandler(server);
 
 app.use(helmet());
-app.use(helmet.hidePoweredBy({ setTo: "PHP 7.4.3" }));
-app.use(nocache());
+app.use(helmet.hidePoweredBy({ setTo: "PHP 7.4.3" })); // set a fake X-Powered-By header
+app.use(nocache()); // don't allow caching
 
 app.use("/public", express.static(process.cwd() + "/public"));
 app.use("/assets", express.static(process.cwd() + "/assets"));

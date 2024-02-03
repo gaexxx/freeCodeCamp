@@ -14,6 +14,7 @@ class Player {
     this.color = color;
   }
 
+  // manage movement in 8 directions
   movePlayer(speed, arrowUp, arrowDown, arrowLeft, arrowRight) {
     let sl = 0;
     let sr = 0;
@@ -63,6 +64,7 @@ class Player {
     return true;
   }
 
+  // sort the player array by score and find the score of the player who's playing
   calculateRank(arr, mainPlayer) {
     let playersSorted = arr.sort((a, b) => {
       return b.score - a.score;

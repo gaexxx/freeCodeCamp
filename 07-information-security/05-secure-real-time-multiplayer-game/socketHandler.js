@@ -43,7 +43,6 @@ const socketHandler = (server) => {
     }
 
     socket.on("updatePlayers", (data) => {
-      // console.log(data.id);
       const index = players.findIndex((player) => player.id === data.id);
       if (index !== -1) {
         players[index] = data;
