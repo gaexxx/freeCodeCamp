@@ -12,9 +12,8 @@ const minX = 5;
 const maxX = 640 - 5; // canvas.width - 5
 const minY = 50;
 const maxY = 480 - 5; // canvas.height - 5
-const r = 20;
 const appleSize = 25;
-const dogSize = 100;
+const dogSize = 70;
 const speed = 5;
 let appleColor = "";
 let apple = new Image();
@@ -29,9 +28,9 @@ let arrowDown = false;
 let arrowLeft = false;
 let arrowRight = false;
 
-let getDistance = function (xCircle1, yCircle1, xCircle2, yCircle2) {
+let getDistance = function (xObj1, yObj1, xObj2, yObj2) {
   var result = Math.sqrt(
-    Math.pow(xCircle2 - xCircle1, 2) + Math.pow(yCircle2 - yCircle1, 2)
+    Math.pow(xObj2 - xObj1, 2) + Math.pow(yObj2 - yObj1, 2)
   );
   return result;
 };
@@ -51,6 +50,7 @@ function text(text, px, x, y) {
 
 function animate() {
   context.clearRect(0, 0, canvas.width, canvas.height);
+  rectangle(minX, minY, maxX - minX, maxY - minY);
 
   let mainPlayer = players.filter((player) => player.id === socket.id);
 
@@ -92,8 +92,6 @@ function animate() {
     }
   }
   // console.log(mainPlayer[0]);
-
-  rectangle(minX, minY, maxX - minX, maxY - minY);
 
   text("Controls: WASD", 14, canvas.width / 6, 35);
   text("Apple Race", 18, canvas.width / 2, 35);

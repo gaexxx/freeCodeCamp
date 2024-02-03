@@ -2,7 +2,8 @@ const minX = 5;
 const maxX = 640 - 5; // canvas.width - 5
 const minY = 50;
 const maxY = 480 - 5; // canvas.height - 5
-const r = 20;
+const dogSize = 70;
+const dogOneThird = dogSize / 3; // to let the player move close to the border
 
 class Player {
   constructor({ x, y, score, id, color }) {
@@ -40,11 +41,17 @@ class Player {
       sd = speed;
     }
 
-    if (this.x + sl >= minX + r && this.x + sr <= maxX - r) {
+    if (
+      this.x + sl >= minX + dogOneThird &&
+      this.x + sr <= maxX - dogOneThird
+    ) {
       this.x += sl + sr;
     }
 
-    if (this.y + su >= minY + r && this.y + sd <= maxY - r) {
+    if (
+      this.y + su >= minY + dogOneThird &&
+      this.y + sd <= maxY - dogOneThird
+    ) {
       this.y += su + sd;
     }
   }
