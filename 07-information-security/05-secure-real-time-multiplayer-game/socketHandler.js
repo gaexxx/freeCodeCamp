@@ -1,10 +1,9 @@
-import dogSvg from "./public/images/player";
-
 const minX = 5;
 const maxX = 640 - 5; // canvas.width - 5
 const minY = 50;
 const maxY = 480 - 5; // canvas.height - 5
-const r = 20;
+const dogSize = 70;
+const dogHalfSize = dogSize / 2;
 const appleSize = 25;
 const appleHalfSize = appleSize / 2;
 
@@ -29,8 +28,8 @@ const socketHandler = (server) => {
   io.on("connect", (socket) => {
     players.push({
       id: socket.id,
-      x: random.x(r),
-      y: random.y(r),
+      x: random.x(dogHalfSize),
+      y: random.y(dogHalfSize),
       score: 0,
       color: randomColor(),
     });
