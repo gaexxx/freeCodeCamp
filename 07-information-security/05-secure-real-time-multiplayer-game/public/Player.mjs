@@ -5,19 +5,12 @@ const maxY = 480 - 5; // canvas.height - 5
 const r = 20;
 
 class Player {
-  constructor({ x, y, score, id }) {
+  constructor({ x, y, score, id, color }) {
     this.x = x;
     this.y = y;
     this.score = score;
     this.id = id;
-  }
-
-  render(context) {
-    context.beginPath();
-    context.arc(this.x, this.y, 20, 0, 2 * Math.PI); // cerchio
-    context.fillStyle = "blue";
-    context.fill();
-    context.stroke();
+    this.color = color;
   }
 
   movePlayer(speed, arrowUp, arrowDown, arrowLeft, arrowRight) {

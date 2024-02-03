@@ -1,3 +1,5 @@
+import dogSvg from "./public/images/player";
+
 const minX = 5;
 const maxX = 640 - 5; // canvas.width - 5
 const minY = 50;
@@ -15,6 +17,7 @@ const random = {
     (minY + radius),
   value: () => Math.floor(Math.random() * (4 - 1)) + 1,
 };
+let randomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
 let collectible;
 
@@ -24,7 +27,13 @@ const socketHandler = (server) => {
   let players = [];
 
   io.on("connect", (socket) => {
-    players.push({ id: socket.id, x: random.x(r), y: random.y(r), score: 0 });
+    players.push({
+      id: socket.id,
+      x: random.x(r),
+      y: random.y(r),
+      score: 0,
+      color: randomColor(),
+    });
     if (!collectible) {
       collectible = {
         id: 0,

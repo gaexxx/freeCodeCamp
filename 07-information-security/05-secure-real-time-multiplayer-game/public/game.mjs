@@ -1,6 +1,7 @@
 import Player from "./Player.mjs";
 import Collectible from "./Collectible.mjs";
 import appleSvg from "./images/collectible.js";
+import dogSvg from "./images/player.js";
 
 var socket = io();
 
@@ -13,11 +14,14 @@ const minY = 50;
 const maxY = 480 - 5; // canvas.height - 5
 const r = 20;
 const appleSize = 25;
+const dogSize = 100;
 const speed = 5;
 let appleColor = "";
 let apple = new Image();
+const playerImages = new Map();
 
 let players = [];
+
 let collectible;
 
 let arrowUp = false;
@@ -63,6 +67,17 @@ function animate() {
       appleSize
     );
 
+    players.forEach((data) => {
+      const playerImage = playerImages.get(data.id);
+      context.drawImage(
+        playerImage,
+        data.x - dogSize / 2,
+        data.y - dogSize / 2,
+        dogSize,
+        dogSize
+      );
+    });
+
     if (
       getDistance(
         mainPlayer[0].x,
@@ -80,10 +95,6 @@ function animate() {
 
   rectangle(minX, minY, maxX - minX, maxY - minY);
 
-  players.forEach((data) => {
-    data.render(context);
-  });
-
   text("Controls: WASD", 14, canvas.width / 6, 35);
   text("Apple Race", 18, canvas.width / 2, 35);
   if (mainPlayer[0]) {
@@ -98,6 +109,7 @@ function animate() {
       x: mainPlayer[0].x,
       y: mainPlayer[0].y,
       score: mainPlayer[0].score,
+      color: mainPlayer[0].color,
     });
   }
 
@@ -130,12 +142,21 @@ socket.on("onCollect", (data) => {
 });
 
 socket.on("onUpdatePlayers", (updatedPlayers) => {
+  updatedPlayers.forEach((player) => {
+    // Check if an Image object exists for the player
+    if (!playerImages.has(player.id)) {
+      // If not, create a new Image object and set its source
+      playerImages.set(player.id, new Image());
+      playerImages.get(player.id).src = dogSvg(player.color);
+    }
+  });
   players = updatedPlayers.map((player) => {
     return new Player({
       id: player.id,
       x: player.x,
       y: player.y,
       score: player.score,
+      color: player.color,
     });
   });
 });
