@@ -24,20 +24,20 @@ class UnitTests(unittest.TestCase):
     def test_port_scanner_verbose_ip_no_hostname_returned_single_port(self):
         str = port_scanner.get_open_ports("104.26.10.78", [440, 450], True)
         actual = str
-        expected = "Open ports for 104.26.10.78\nPORT     SERVICE\n443      https"
-        self.assertEqual(actual, expected, "Expected 'Open ports for 104.26.10.78\nPORT     SERVICE\n443      https'")
+        expected = "Open ports for 104.26.10.78\nPORT      SERVICE\n443       https"
+        self.assertEqual(actual, expected, "Expected 'Open ports for 104.26.10.78\nPORT      SERVICE\n443       https'")
 
     def test_port_scanner_verbose_ip_hostname_returned_multiple_ports(self):
         str = port_scanner.get_open_ports("137.74.187.104", [440, 450], True)
         actual = str
-        expected = "Open ports for hackthissite.org (137.74.187.104)\nPORT     SERVICE\n443      https"
-        self.assertEqual(actual, expected, "Expected 'Open ports for hackthissite.org (137.74.187.104)\nPORT     SERVICE\n443      https'")
+        expected = "Open ports for hackthissite.org (137.74.187.104)\nPORT      SERVICE\n443       https"
+        self.assertEqual(actual, expected, "Expected 'Open ports for hackthissite.org (137.74.187.104)\nPORT      SERVICE\n443      https'")
 
     def test_port_scanner_verbose_hostname_multiple_ports(self):
         str = port_scanner.get_open_ports("scanme.nmap.org", [20, 80], True)
         actual = str
-        expected = "Open ports for scanme.nmap.org (45.33.32.156)\nPORT     SERVICE\n22       ssh\n80       http"
-        self.assertEqual(actual, expected, "Expected 'Open ports for scanme.nmap.org (45.33.32.156)\nPORT     SERVICE\n22       ssh\n80       http'")
+        expected = "Open ports for scanme.nmap.org (45.33.32.156)\nPORT      SERVICE\n22        ssh\n80        http"
+        self.assertEqual(actual, expected, "Expected 'Open ports for scanme.nmap.org (45.33.32.156)\nPORT      SERVICE\n22        ssh\n80        http'")
 
     def test_port_scanner_invalid_hostname(self):
         err = port_scanner.get_open_ports("scanme.nmap", [22, 42], False)
