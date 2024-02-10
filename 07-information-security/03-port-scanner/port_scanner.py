@@ -74,7 +74,6 @@ def get_open_ports(target, port_range, verbose=False):
 
 
     if (verbose == False):
-        print("open ports:", port_range)
         return(open_ports)
     elif (verbose == True):
         data = [("PORT", "", "", "SERVICE")]
