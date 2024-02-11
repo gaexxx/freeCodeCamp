@@ -2,4 +2,4 @@
 
 Based on https://www.freecodecamp.org/learn/information-security/information-security-projects/sha-1-password-cracker
 
-Run `python3 main.py`
+Run `python3 main.py`. The tests will run automatically.
