@@ -1,0 +1,152 @@
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Source Sans Pro;
+  font-size: 1.1rem;
+}
+
+#header {
+  color: rgb(200, 200, 200);
+  background-color: rgb(20, 20, 20);
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid gray;
+}
+
+#header h1 {
+  margin-left: 1rem;
+}
+
+#container {
+  width: 100%;
+  height: 100%;
+}
+#left_panel {
+  position: absolute;
+  left: 0;
+  top: 4rem;
+  bottom: 0;
+  right: 100px;
+  background: lightgray;
+  min-width: 1rem;
+  height: 100%;
+}
+
+#right_panel {
+  position: absolute;
+  right: 0;
+  top: 4rem;
+  bottom: 0;
+  width: 50%;
+  height: 100%;
+  color: black;
+  background: lightgray;
+}
+
+#drag {
+  position: absolute;
+  left: -4px;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  cursor: w-resize;
+  background-color: rgb(20, 20, 20);
+  border-left: 1px solid gray;
+  height: 100%;
+}
+
+.title-box {
+  background-color: rgb(20, 20, 20);
+}
+
+.title-editor {
+  background-color: lightgray;
+  padding-left: 1rem;
+  width: 6.5rem;
+}
+
+.title-preview {
+  background-color: lightgray;
+  padding-left: 1rem;
+  width: 8rem;
+}
+
+#editor {
+  width: 100%;
+  height: 100%;
+  font-family: monospace;
+  font-size: 1rem;
+  border: 0;
+  padding: 1rem;
+  background-color: lightgray;
+  resize: none;
+  outline: none;
+}
+
+#preview {
+  background-color: lightgray;
+  padding: 1rem 1rem 1rem 1.5rem;
+}
+
+@media only screen and (max-width: 550px) {
+  #radice {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    margin: auto auto;
+  }
+
+  #header {
+    height: 4rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid gray;
+  }
+
+  #header h1 {
+    margin-left: 1rem;
+  }
+
+  #container {
+    text-alig: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #left_panel {
+    position: unset;
+    background: lightgray;
+    width: 100%;
+  }
+
+  #right_panel {
+    position: unset;
+    color: black;
+    background: lightgray;
+    width: 100%;
+    border-top: 1px solid gray;
+  }
+
+  #drag {
+    position: absolute;
+    background-color: transparent;
+  }
+
+  #editor {
+    width: 100%;
+    min-height: 10rem;
+  }
+}
