@@ -3,7 +3,9 @@
 Based on https://www.freecodecamp.org/learn/front-end-development-libraries/front-end-development-libraries-projects/build-a-random-quote-machine
 
 Run:
+
 `npm install`
+
 `npm run dev`
 
 At this time, freeCodeCamp tests are incompatible with react 18.
